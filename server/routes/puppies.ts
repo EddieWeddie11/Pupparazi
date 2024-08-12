@@ -1,5 +1,5 @@
 import express from 'express'
-import * as fs from 'node:fs/promises'
+import { getPuppies } from '../../store'
 
 const router = express.Router()
 export default router
@@ -10,10 +10,8 @@ export default router
 
 router.get('/', async (req, res) => {
   try {
-    // This is what happens if the code works
-    const json = await fs.readFile('./storage/data.json', 'utf8')
-    const data = JSON.parse(json)
-    res.json(data)
+    const data = await getPuppies()
+    res.json(data) // Returning the response as a JSON with the Parse data (status code 200)
   } catch (error: unknown) {
     // This is what happens if the code doesn't work
     console.log('getting puppies failed', error)
