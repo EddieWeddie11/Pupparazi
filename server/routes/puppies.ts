@@ -1,5 +1,5 @@
 import express from 'express'
-import { getPuppies } from '../../store'
+import { getPuppies, getPuppyById } from '../../store'
 
 const router = express.Router()
 export default router
@@ -18,3 +18,33 @@ router.get('/', async (req, res) => {
     res.sendStatus(500)
   }
 })
+
+router.get('/:id', async (req, res) => {
+  const id = Number(req.params.id)
+  const onePuppy = {
+    onePuppy: id
+  }
+}
+
+
+
+
+
+
+
+
+
+
+//   try {
+//     const puppy = await getPuppyById(id)
+//     if (puppy) {
+//       res.json(puppy)
+//       console.log(id)
+//     } else {
+//       res.sendStatus(404)
+//     }
+//   } catch (error: unknown) {
+//     console.log('error gettting puppy by id', error)
+//     res.sendStatus(500)
+//   }
+// })

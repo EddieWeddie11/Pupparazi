@@ -4,15 +4,21 @@ import type { Puppy } from './models/Puppy.ts'
 
 // Function that gets an ARRAY of ALL PUPPIES, and then returns one with matching ID or undefined if not found
 export async function getPuppyById(id: number): Promise<Puppy | undefined> {
-  const puppies = await getPuppies()
-  // add logic to get one puppy
+  const puppyId = await getPuppies()
+  try {
+    const foundPuppy = puppyId.find(() => foundPuppy === id)
+    // Trying to find the matching ID to the puppy
+  } catch (error: unknown) {
+    console.error('loading the pups failed', error)
+    // Showing error if it is undefined
+  }
 }
 
 export async function getPuppies() {
   try {
     const json = await fs.readFile('./storage/data.json', 'utf8') // Reading the file
-    const data = JSON.parse(json) //
-    return data
+    const data = JSON.parse(json)
+    return data // Returning the data.json file where the puppies are
   } catch (error: unknown) {
     console.error('loading the pups failed', error)
   }
