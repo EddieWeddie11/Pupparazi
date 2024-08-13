@@ -30,12 +30,14 @@ export async function deletePuppy(id: number): Promise<void> {
 // Function for ADDING a new puppy
 export async function addPuppy(newPuppyData: PuppyData): Promise<void> {
   const data = await getPuppies()
-  const copiedData = [...data]
+  const copiedData = [...data.puppies]
+  console.log(copiedData)
 
   // Find the next id of puppy
   const nextId =
     copiedData
-      .map((puppy) => puppy.id)
+      .map((puppy) => puppy.id) // For each puppy object in copiedData, puppy.id takes the id property, showing in an array of ID
+      // Reduce takes 2 arguments, the maxmimumId and the currentId. The Math.max is returning the greater of the two arguments so maxId always going to be the greater.
       .reduce((maxId, currentId) => Math.max(maxId, currentId), 0) + 1
 
   // Add the new puppy with the nextId variable
@@ -44,6 +46,8 @@ export async function addPuppy(newPuppyData: PuppyData): Promise<void> {
 
   // Save the updated data back to the file
   await fs.writeFile('./storage/data.json', JSON.stringify(copiedData))
+
+  return nextId
 }
 
 export async function getPuppies() {
