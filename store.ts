@@ -2,13 +2,13 @@
 import * as fs from 'node:fs/promises'
 import type { Puppy } from './models/Puppy.ts'
 import type { PuppyData } from './models/Puppy.ts'
-import { writeFile } from 'node:fs'
 
 // Function that gets an ARRAY of ALL PUPPIES, and then returns one with matching ID or undefined if not found
 export async function getPuppyById(id: number): Promise<Puppy | undefined> {
   try {
     const data = await getPuppies()
     const puppy = data.puppies.find((p: Puppy) => p.id === id)
+    // console.log('showing return puppy', puppy)
     // Trying to find the matching ID to the puppy
     return puppy
   } catch (error: unknown) {
@@ -22,7 +22,8 @@ export async function deletePuppy(id: number): Promise<void> {
   const data = await getPuppies()
   data.puppies = data.puppies.filter((puppy: Puppy) => puppy.id != id)
   // Filtering out only one puppy
-  const newFile = JSON.stringify(data, null, 2) //
+  const newFile = JSON.stringify(data, null, 2)
+  console.log(newFile)
   await fs.writeFile('./storage/data.json', newFile)
 }
 // Stringfy - turns object into a string. The reason is because write file always take a string and write it to the file as is
@@ -31,22 +32,21 @@ export async function deletePuppy(id: number): Promise<void> {
 export async function addPuppy(newPuppyData: PuppyData): Promise<void> {
   const data = await getPuppies()
   const copiedData = [...data.puppies]
-  console.log(copiedData)
-
   // Find the next id of puppy
   const nextId =
     copiedData
       .map((puppy) => puppy.id) // For each puppy object in copiedData, puppy.id takes the id property, showing in an array of ID
       // Reduce takes 2 arguments, the maxmimumId and the currentId. The Math.max is returning the greater of the two arguments so maxId always going to be the greater.
       .reduce((maxId, currentId) => Math.max(maxId, currentId), 0) + 1
-
+  // console.log('showing next id', nextId)
   // Add the new puppy with the nextId variable
   const newPuppy = { ...newPuppyData, id: nextId }
   copiedData.push(newPuppy)
-
   // Save the updated data back to the file
-  await fs.writeFile('./storage/data.json', JSON.stringify(copiedData))
-
+  await fs.writeFile(
+    './storage/data.json',
+    JSON.stringify({ puppies: copiedData }, null, 2),
+  )
   return nextId
 }
 
