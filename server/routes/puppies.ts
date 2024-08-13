@@ -1,5 +1,5 @@
 import express from 'express'
-import { getPuppies, getPuppyById } from '../../store'
+import { deletePuppy, getPuppies, getPuppyById } from '../../store'
 
 const router = express.Router()
 export default router
@@ -31,18 +31,13 @@ router.get('/:id', async (req, res) => {
   console.log(id)
 })
 
-// router.get('/:id', async (req, res) => {
-//   try {
-//     const id = Number(req.params.id);
-//     const puppy = await getPuppyById(id);
-
-//     if (puppy) {
-//       res.json(puppy);
-//     } else {
-//       res.status(404).json({ message: 'Puppy not found' });
-//     }
-//   } catch (error) {
-//     console.error(error);
-//     res.status(500).json({ message: 'Internal server error' });
-//   }
-// });
+router.delete('/:id', async (req, res) => {
+  try {
+    const id = Number(req.params.id)
+    await deletePuppy(id)
+    res.sendStatus(200)
+  } catch (error: unknown) {
+    console.log('Could not delete puppy', error)
+    res.sendStatus(500)
+  }
+})
