@@ -21,30 +21,28 @@ router.get('/', async (req, res) => {
 
 router.get('/:id', async (req, res) => {
   const id = Number(req.params.id)
-  const onePuppy = {
-    onePuppy: id
+  const puppy = await getPuppyById(id)
+  console.log(puppy)
+  if (puppy) {
+    res.json(puppy)
+  } else {
+    res.sendStatus(404)
   }
-}
+  console.log(id)
+})
 
-
-
-
-
-
-
-
-
-
+// router.get('/:id', async (req, res) => {
 //   try {
-//     const puppy = await getPuppyById(id)
+//     const id = Number(req.params.id);
+//     const puppy = await getPuppyById(id);
+
 //     if (puppy) {
-//       res.json(puppy)
-//       console.log(id)
+//       res.json(puppy);
 //     } else {
-//       res.sendStatus(404)
+//       res.status(404).json({ message: 'Puppy not found' });
 //     }
-//   } catch (error: unknown) {
-//     console.log('error gettting puppy by id', error)
-//     res.sendStatus(500)
+//   } catch (error) {
+//     console.error(error);
+//     res.status(500).json({ message: 'Internal server error' });
 //   }
-// })
+// });
