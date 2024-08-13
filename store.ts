@@ -27,6 +27,25 @@ export async function deletePuppy(id: number): Promise<void> {
 }
 // Stringfy - turns object into a string. The reason is because write file always take a string and write it to the file as is
 
+// Function for ADDING a new puppy
+export async function addPuppy(newPuppyData: PuppyData): Promise<void> {
+  const data = await getPuppies()
+  const copiedData = [...data]
+
+  // Find the next id of puppy
+  const nextId =
+    copiedData
+      .map((puppy) => puppy.id)
+      .reduce((maxId, currentId) => Math.max(maxId, currentId), 0) + 1
+
+  // Add the new puppy with the nextId variable
+  const newPuppy = { ...newPuppyData, id: nextId }
+  copiedData.push(newPuppy)
+
+  // Save the updated data back to the file
+  await fs.writeFile('./storage/data.json', JSON.stringify(copiedData))
+}
+
 export async function getPuppies() {
   try {
     const json = await fs.readFile('./storage/data.json', 'utf8') // Reading the file

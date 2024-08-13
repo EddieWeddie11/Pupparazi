@@ -1,5 +1,5 @@
 import express from 'express'
-import { deletePuppy, getPuppies, getPuppyById } from '../../store'
+import { addPuppy, deletePuppy, getPuppies, getPuppyById } from '../../store'
 
 const router = express.Router()
 export default router
@@ -38,6 +38,20 @@ router.delete('/:id', async (req, res) => {
     res.sendStatus(200)
   } catch (error: unknown) {
     console.log('Could not delete puppy', error)
+    res.sendStatus(500)
+  }
+})
+
+router.post('/', async (req, res) => {
+  try {
+    // some code that calls the addPuppy function.
+    const id = await addPuppy(req.body)
+    // respond with your new puppy id
+    res.json({ id })
+  } catch (error) {
+    // If things go wrong in the try block, the catch block should log an error and respond with a server error status code.
+    // For example:
+    console.error(error)
     res.sendStatus(500)
   }
 })
