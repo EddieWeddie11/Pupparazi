@@ -1,0 +1,67 @@
+{
+  "puppies": [
+    {
+      "id": 1,
+      "name": "Fido",
+      "owner": "Fred",
+      "image": "/images/puppy1.jpg",
+      "breed": "Labrador"
+    },
+    {
+      "id": 2,
+      "name": "Coco",
+      "owner": "Chloe",
+      "image": "/images/puppy2.jpg",
+      "breed": "Labrador"
+    },
+    {
+      "id": 3,
+      "name": "Magnum",
+      "owner": "Michael",
+      "image": "/images/puppy3.jpg",
+      "breed": "Rottweiler"
+    },
+    {
+      "id": 5,
+      "name": "Murphy",
+      "owner": "Matthew",
+      "image": "/images/puppy5.jpg",
+      "breed": "Pug"
+    },
+    {
+      "id": 6,
+      "name": "Bella",
+      "owner": "Brianna",
+      "image": "/images/puppy6.jpg",
+      "breed": "Labrador"
+    },
+    {
+      "id": 7,
+      "name": "Rocky",
+      "owner": "Ricky",
+      "image": "/images/puppy7.jpg",
+      "breed": "Labrador"
+    },
+    {
+      "name": "Ed",
+      "breed": "Eddie",
+      "owner": "Edawrd",
+      "image": "/images/puppy1.jpg",
+      "id": 8
+    },
+    {
+      "name": "awd",
+      "breed": "awdawd",
+      "owner": "awd",
+      "image": "/images/puppy1.jpg",
+      "id": 9
+    },
+    {
+      "name": "awdawd",
+      "breed": "awdawd",
+      "owner": "",
+      "image": "/images/puppy1.jpg",
+      "id": 10
+    }
+  ]
+}

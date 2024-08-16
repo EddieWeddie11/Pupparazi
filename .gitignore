@@ -5,5 +5,4 @@ node_modules/
 test-results
 /coverage
 /dist
-/storage
 settings.json

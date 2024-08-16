@@ -1,5 +1,5 @@
 import express from 'express'
-import { addPuppy, deletePuppy, getPuppies, getPuppyById } from '../../store'
+import { addPuppy, deletePuppy, getPuppies, getPuppyById } from '../store'
 
 const router = express.Router()
 export default router
@@ -53,5 +53,5 @@ router.post('/', async (req, res) => {
     // For example:
     console.error(error)
     res.sendStatus(500)
-  }
+  \}
 })
